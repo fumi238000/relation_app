@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
 
 def index
-    @posts = Post.order(:id)
+    @posts = Post.order(:id).includes(:user)
   end
 
   def new
@@ -19,14 +19,18 @@ def index
   end
 
   def edit
+    # binding.pry
   end
 
   def update
+    @post.update!(post_params)
+    redirect_to @post
   end
 
   def destroy
     # post = Post.find(params[:id])
-     @post.destroy!
+   
+    @post.destroy!
     redirect_to root_path
   end
 
@@ -40,7 +44,7 @@ def index
   # メッセージ投稿者とログインユーザーが一致しているか
    def set_post
      @post = current_user.posts.find(params[:id])
-     redirect_to root_path, alert: "権限がありません"
+      # redirect_to root_path, alert: "権限がありません"
    end
 
   

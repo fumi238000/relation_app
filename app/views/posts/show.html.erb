@@ -5,7 +5,7 @@
 
 
   <% #modelで定義したメソッド %>
-<p>  
+<p id="post-<%= @post.id%>">  
   <% if @post.liked_by?(current_user) %> 
     <%# 「いいね！」済み %>
     <%= render "like", post: @post %>

@@ -3,5 +3,11 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
 
-validates :content, presence: true
+  validates :content, presence: true
+
+  # いいねがついてると「true」, いいねしていない時は「false」
+  def liked_by?(user)
+    likes.find_by(user_id: user.id).present?
+  end
+
 end

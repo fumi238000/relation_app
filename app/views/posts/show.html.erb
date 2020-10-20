@@ -5,20 +5,15 @@
 
 
   <% #modelで定義したメソッド %>
-<p>
-  
-  <% if @post.liked_by?(current_user) %> <%# いいね済み:ture,していない場合：false %>
+<p>  
+  <% if @post.liked_by?(current_user) %> 
     <%# 「いいね！」済み %>
-    ★
+    <%= link_to "★", post_likes_path(@post), method: :delete %>
   <% else %>
     <%# 「いいね」していない %>
-    ☆
+    <%= link_to "⭐︎", post_likes_path(@post), method: :post %>
   <% end %>
 </p>
-
-
-
-
 
 
 
